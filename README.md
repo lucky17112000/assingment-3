@@ -22,22 +22,22 @@ This query combines data from three tables (`booking`, `users`, and `vehicles`) 
 **SQL Query:**
 
 ```sql
-SELECT
+select
     booking.booking_id,
-    users.name AS customer_name,
-    vehicles.name AS vehicle_name,
+    users.name as customer_name,
+    vehicles.name as vehicle_name,
     booking.start_date,
     booking.end_date,
     booking.status
-FROM booking
-INNER JOIN users USING(user_id)
-INNER JOIN vehicles USING(vehicle_id);
+from booking
+inner join users using(user_id)
+inner join vehicles using(vehicle_id);
 ```
 
 **Key Features:**
 
-- Uses `USING` clause for cleaner join syntax on common column names
-- Returns customer and vehicle names instead of IDs for better readability
+- Uses `using` clause for cleaner join syntax on common column names
+- Returns customer and vehicle names instead of ids for better readability
 - Includes booking dates and status for complete information
 
 ---
@@ -52,26 +52,26 @@ This query identifies all vehicles in the inventory that have no booking history
 **SQL Query:**
 
 ```sql
-SELECT
+select
     vehicle_id,
     name,
     type,
     model,
     registration_number,
     rental_price,
-    availability_status AS status
-FROM vehicles
-WHERE NOT EXISTS (
-    SELECT *
-    FROM booking
-    WHERE booking.vehicle_id = vehicles.vehicle_id
+    availability_status as status
+from vehicles
+where not exists (
+    select *
+    from booking
+    where booking.vehicle_id = vehicles.vehicle_id
 )
-ORDER BY vehicle_id ASC;
+order by vehicle_id asc;
 ```
 
 **Key Features:**
 
-- Uses `NOT EXISTS` for efficient filtering
+- Uses `not exists` for efficient filtering
 - Orders results by vehicle_id for easy reference
 - Useful for identifying underutilized inventory
 
@@ -87,15 +87,15 @@ This query filters the vehicles table to display only cars that are currently av
 **SQL Query:**
 
 ```sql
-SELECT *
-FROM vehicles
-WHERE type = 'car'
-  AND availability_status = 'available';
+select *
+from vehicles
+where type = 'car'
+  and availability_status = 'available';
 ```
 
 **Key Features:**
 
-- Combines multiple filter conditions using AND operator
+- Combines multiple filter conditions using and operator
 - Filters by both vehicle type and availability status
 - Returns all columns for matching vehicles
 
@@ -111,20 +111,20 @@ This query analyzes booking frequency by vehicle, identifying popular vehicles w
 **SQL Query:**
 
 ```sql
-SELECT
-    name AS vehicle_name,
-    COUNT(*) AS total_bookings
-FROM vehicles
-INNER JOIN booking USING(vehicle_id)
-GROUP BY name
-HAVING COUNT(*) > 2;
+select
+    name as vehicle_name,
+    count(*) as total_bookings
+from vehicles
+inner join booking using(vehicle_id)
+group by name
+having count(*) > 2;
 ```
 
 **Key Features:**
 
-- Uses `COUNT(*)` to aggregate booking frequency
-- `GROUP BY` organizes results by vehicle name
-- `HAVING` clause filters groups after aggregation (only vehicles with more than 2 bookings)
+- Uses `count(*)` to aggregate booking frequency
+- `group by` organizes results by vehicle name
+- `having` clause filters groups after aggregation (only vehicles with more than 2 bookings)
 - Useful for identifying high-demand vehicles
 
 ---
@@ -132,5 +132,5 @@ HAVING COUNT(*) > 2;
 ## Notes
 
 - All queries assume proper foreign key relationships between tables
-- The `USING` clause is used where column names are identical across joined tables
-- Queries are ordered from basic to advanced SQL concepts
+- The `using` clause is used where column names are identical across joined tables
+- Queries are ordered from basic to advanced sql concepts
