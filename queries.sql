@@ -6,12 +6,14 @@ inner join vehicles using(vehicle_id)
 
 
 
+
+
 query-2
 
-  select vehicle_id , name , type , model , registration_number , rental_price ,availability_status as status from vehicles
+ select vehicle_id , name , type , model , registration_number , rental_price ,availability_status as status from vehicles
   where not exists(
   select * from booking
-  where vehicles.id=booking.vehicle_id
+  where vehicles.vehicle_id=booking.vehicle_id
   )order by vehicle_id asc
 
 
@@ -19,7 +21,7 @@ query-2
 query-3
 
   
-select * from vehicles
+select vehicle_id , name , type , model , registration_number , rental_price , availability_status as status from vehicles
 where type='car' and availability_status='available'
 
 

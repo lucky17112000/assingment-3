@@ -34,6 +34,8 @@ inner join users using(user_id)
 inner join vehicles using(vehicle_id);
 ```
 
+![alt text](image.png)
+
 **Key Features:**
 
 - Uses `using` clause for cleaner join syntax on common column names
@@ -69,6 +71,8 @@ where not exists (
 order by vehicle_id asc;
 ```
 
+![alt text](image-1.png)
+
 **Key Features:**
 
 - Uses `not exists` for efficient filtering
@@ -92,6 +96,8 @@ from vehicles
 where type = 'car'
   and availability_status = 'available';
 ```
+
+![alt text](image-2.png)
 
 **Key Features:**
 
@@ -119,6 +125,8 @@ inner join booking using(vehicle_id)
 group by name
 having count(*) > 2;
 ```
+
+![alt text](image-3.png)
 
 **Key Features:**
 
